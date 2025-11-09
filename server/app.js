@@ -2,8 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import { features } from "process";
 import dotenv from "dotenv";
+import cors from "cors";
 dotenv.config({ path: "./server/.env" });
 const app = express();
+app.use(cors()); // This enables CORS for all routes and origins
 const port = process.env.PORT || 3000;
 const { Schema, model } = mongoose;
 const { GoogleGenAI } = await import("@google/genai");
