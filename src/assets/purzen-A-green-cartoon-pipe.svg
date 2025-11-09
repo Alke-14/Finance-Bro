@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 455.71 581.43"
+  version="1.0"
+>
+  <defs>
+    <!-- Base metallic gradient -->
+    <linearGradient id="grayGradientBase" x1="-742.14" y1="139.51" x2="-286.43" y2="139.51" gradientUnits="userSpaceOnUse">
+      <stop offset="0" style="stop-color:#5c5c5c"/>
+      <stop offset="1" style="stop-color:#a6a6a6"/>
+    </linearGradient>
+
+    <linearGradient id="grayGradientTall" x1="-742.14" y1="139.51" x2="-286.43" y2="139.51"
+      gradientUnits="userSpaceOnUse"
+      gradientTransform="matrix(.76923 0 0 2.5351 -118.68 69.419)">
+      <stop offset="0" style="stop-color:#5c5c5c"/>
+      <stop offset="1" style="stop-color:#c0c0c0"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(742.14 -53.076)">
+    <!-- Body -->
+    <rect
+      x="-685.71" y="216.65" width="342.86" height="412.86"
+      style="stroke-linejoin:round;stroke:#4b4b4b;stroke-width:10;fill:url(#grayGradientTall)"
+    />
+    <!-- Top -->
+    <rect
+      x="-737.14" y="58.076" width="445.71" height="162.86"
+      style="stroke-linejoin:round;stroke:#4b4b4b;stroke-width:10;fill:url(#grayGradientBase)"
+    />
+    <!-- Inner bars -->
+    <rect x="-467.87" y="63.076" width="68.596" height="152.5" style="fill:#bfbfbf"/>
+    <rect x="-381.3"  y="63.076" width="27.168" height="152.5" style="fill:#bfbfbf"/>
+    <rect x="-492.16" y="226.29" width="68.596" height="396.79" style="fill:#bfbfbf"/>
+    <rect x="-405.58" y="226.29" width="27.168" height="396.79" style="fill:#bfbfbf"/>
+
+    <!-- Dark edges -->
+    <rect x="-731.79" y="63.097" width="51.429" height="152.66" style="fill:#707070"/>
+    <rect x="-680.36" y="225.95" width="51.429" height="398.37" style="fill:#707070"/>
+    <rect x="-739.43" y="59.382" width="16.162" height="156.57" style="fill:#3a3a3a"/>
+    <rect x="-689.93" y="224.04" width="16.162" height="403.05" style="fill:#3a3a3a"/>
+    <rect x="-667.79" y="63.097" width="7.992" height="152.66" style="fill:#707070"/>
+    <rect x="-618.04" y="225.73" width="7.992" height="398.63" style="fill:#707070"/>
+  </g>
+</svg>
