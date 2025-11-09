@@ -9,6 +9,7 @@ import {
 } from "./ui/card";
 import crown from "../assets/crown.svg";
 import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 function TopResult({ result, rank }: { result: any; rank: number }) {
   return (
@@ -64,7 +65,9 @@ function TopResult({ result, rank }: { result: any; rank: number }) {
               })
             : ""}
         </p>
-        <Button>View Details</Button>
+        <Link to={`/car/${result._id}`}>
+          <Button>View Details</Button>
+        </Link>
       </CardFooter>
     </Card>
   );

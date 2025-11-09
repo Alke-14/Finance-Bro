@@ -1,31 +1,6 @@
 import TopResult from "@/components/TopResult";
 import React, { use, useState, useEffect } from "react";
-
-export interface TargetDemographic {
-  age_group: string;
-  income_range: string;
-  urbanicity: string;
-  family_stage: string;
-  environment_consciousness: string;
-  [key: string]: string | undefined;
-}
-
-export interface Result {
-  id?: string | number;
-  model: string;
-  year: number;
-  msrp: number;
-  score: number;
-  seats: number;
-  segment: string;
-  fuel: string;
-  mpgOrRange: string;
-  summary: string;
-  features: string[];
-  target_demographic: TargetDemographic;
-  // allow additional fields from the stored object
-  [key: string]: any;
-}
+import type { Result } from "../lib/types";
 
 function Results() {
   const [results, setResults] = useState<Result[] | null>(null);
@@ -62,7 +37,7 @@ function Results() {
   console.log("Results state:", results);
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 mt-4">
       <h1 className="text-3xl font-bold mb-6">Your Top Results</h1>
       {!results ? (
         <p>No recommendation results available.</p>

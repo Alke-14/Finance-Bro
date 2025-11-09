@@ -164,6 +164,141 @@ app.post("/recommend", async (req, res) => {
   }
 });
 
+app.post("/recommend-reasons", async (req, res) => {
+  try {
+    const { userPrompt, vehicleId } = req.body;
+    if (!userPrompt || !vehicleId) {
+      return res.status(400).json({ error: "Missing userPrompt or vehicleId" });
+    }
+
+    await connectDB();
+    const vehiclesColl = mongoose.connection.db.collection("vehicles");
+
+    // Try both ObjectId and string _id
+    let vehicle = null;
+    if (mongoose.Types.ObjectId.isValid(vehicleId)) {
+      vehicle = await vehiclesColl.findOne({
+        _id: new mongoose.Types.ObjectId(vehicleId),
+      });
+    }
+    if (!vehicle) {
+      vehicle = await vehiclesColl.findOne({ _id: vehicleId });
+    }
+    if (!vehicle) {
+      return res.status(404).json({ error: "Vehicle not found" });
+    }
+
+    // Compose prompt for Gemini
+    const prompt = `
+You are an expert car matchmaker. Given the following user preferences:
+${userPrompt}
+
+And the following vehicle details:
+Model: ${vehicle.model}
+Year: ${vehicle.year}
+Segment: ${vehicle.segment}
+Seats: ${vehicle.seats}
+Fuel: ${vehicle.fuel}
+MPG/Range: ${vehicle.mpgOrRange}
+Features: ${Array.isArray(vehicle.features) ? vehicle.features.join(", ") : ""}
+Summary: ${vehicle.summary || ""}
+${
+  vehicle.target_demographic
+    ? `Target Demographic: ${JSON.stringify(vehicle.target_demographic)}`
+    : ""
+}
+
+1. Explain in 2-3 sentences why this vehicle is a good fit for the user, referencing both the user's prompt and the vehicle's target demographic if relevant.
+2. Then, return a concise list of 5 specific reasons why this vehicle matches the user's needs, each tied to either a feature, specification, or aspect of the target demographic.
+
+Format your response as:
+{
+  "summary": "...",
+  "reasons": [
+    "reason",
+    "reason",
+    ...
+  ]
+}
+`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+    });
+    const text = response.text || "";
+
+    // Try to parse JSON from the response
+    let parsed;
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      // fallback: try to extract JSON block
+      // Try to extract a JSON block matching the required format
+      const match = text.match(
+        /\{\s*"summary"\s*:\s*".+?",\s*"reasons"\s*:\s*\[[\s\S]*?\]\s*\}/
+      );
+      if (match) {
+        try {
+          parsed = JSON.parse(match[0]);
+        } catch {
+          parsed = { summary: "", reasons: [text] };
+        }
+      } else {
+        parsed = { summary: "", reasons: [text] };
+      }
+    }
+    console.log("Generated reasons response:", parsed);
+    return res.status(200).json(parsed); // <-- return so nothing else runs
+  } catch (err) {
+    console.error("Error in /recommend-reasons:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.get("/car/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // 1) Make sure we’re hitting this route
+    // console.log("GET /car/:id hit with id:", id);
+
+    await connectDB(); // ensure this sets mongoose.connection
+
+    const db = mongoose.connection.db;
+    if (!db) {
+      return res.status(500).json({ error: "DB connection not available" });
+    }
+
+    const vehicles = db.collection("vehicles");
+
+    // 2) Validate ObjectId
+    const isObjectId = mongoose.Types.ObjectId.isValid(id);
+
+    // 3) Try both forms if you’re unsure how _id was stored
+    let doc = null;
+
+    if (isObjectId) {
+      doc = await vehicles.findOne({ _id: new mongoose.Types.ObjectId(id) });
+    }
+
+    // If not found by ObjectId, also try string _id (common if seeded manually)
+    if (!doc) {
+      doc = await vehicles.findOne({ _id: id });
+    }
+
+    if (!doc) {
+      return res.status(404).json({ error: "Vehicle not found" });
+    }
+
+    console.log("Fetched vehicle document:", doc);
+    return res.json({ vehicle: doc });
+  } catch (err) {
+    console.error("GET /car/:id error:", err);
+    return res.status(500).json({ error: "Server error" });
+  }
+});
+
 // get top 3 most similar vehicles
 
 app.listen(port, () => {
