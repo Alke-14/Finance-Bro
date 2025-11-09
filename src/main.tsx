@@ -1,20 +1,24 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App'
-import About from './About'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import About from "./About";
+import Layout from "./components/Layout";
+import Results from "./pages/Results";
 
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>  
-        <Route path='/' element={<App />} />
-        <Route path='/about' element={<About />} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<App />} />
+          <Route path="form" element={<About />} />
+          <Route path="results" element={<Results />} />
+        </Route>
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
