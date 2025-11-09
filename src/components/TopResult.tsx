@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 function TopResult({ result, rank }: { result: any; rank: number }) {
   return (
-    <Card className="text-center relative">
+    <Card className="text-center relative transition-all duration-300 border border-transparent hover:border-[#DF2502] hover:scale-105">
       {rank === 1 && (
         <img
           src={crown}
