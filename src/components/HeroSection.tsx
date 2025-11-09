@@ -1,6 +1,8 @@
 // herosection.tsx
 // import React from 'react';
 
+import Search from "./search";
+
 function HeroSection(){
     return (
         <header className ='hero-section'>
@@ -10,7 +12,8 @@ function HeroSection(){
                 </h1>
                 <p className = "hero-subtitle"> Gearing Dreams Towards Reality</p>
                 <div className = "hero-actions">
-                    <button className = 'btn-form'>Get Started</button>
+                    <Search />
+
                     
                 </div>
             </div>

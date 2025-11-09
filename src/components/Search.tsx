@@ -67,7 +67,7 @@ function Search() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-4 bg-[#ffffffcf] rounded-2xl border border-gray-300">
+    <div className=" mx-auto p-4 bg-[#ffffffcf] rounded-2xl border border-gray-300">
       <form onSubmit={handleSubmit}>
         <Label
           htmlFor="search-input"
