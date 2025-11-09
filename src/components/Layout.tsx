@@ -1,19 +1,12 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import Nav from "./Nav";
 
 const Layout: React.FC = () => {
   return (
     <div>
       <header>
-        TODO: Complete the header and footer
-        <nav>
-          <Link to="/">Finance Bro</Link>
-          <div>
-            <Link to="/">Home</Link>
-            <Link to="/form">Form</Link>
-            <Link to="/results">Results</Link>
-          </div>
-        </nav>
+        <Nav />
       </header>
 
       <main>
@@ -21,7 +14,7 @@ const Layout: React.FC = () => {
       </main>
 
       <footer>
-        © {new Date().getFullYear()} Finance Bro — Built with React
+        © {new Date().getFullYear()} CarVibes — Built with React by Julian, Kevin, Lorenzo, and Avery
       </footer>
     </div>
   );
