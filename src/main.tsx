@@ -7,6 +7,7 @@ import "./index.css";
 import App from "./App";
 import About from "./About";
 import Layout from "./components/Layout";
+import Results from "./pages/Results";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
           <Route path="form" element={<About />} />
+          <Route path="results" element={<Results />} />
         </Route>
       </Routes>
     </BrowserRouter>

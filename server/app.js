@@ -152,12 +152,12 @@ app.post("/recommend", async (req, res) => {
     }
 
     scored.sort((a, b) => b.score - a.score);
-    const top3 = scored.slice(0, 3).map(({ doc, score }) => {
+    const results = scored.map(({ doc, score }) => {
       const { embedding: _, ...rest } = doc;
       return { ...rest, score };
     });
 
-    return res.json({ results: top3 });
+    return res.json({ results });
   } catch (error) {
     console.error("Error embedding query:", error);
     return res.status(500).json({ error: "Failed to embed query" });

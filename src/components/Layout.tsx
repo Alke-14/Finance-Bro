@@ -5,12 +5,13 @@ const Layout: React.FC = () => {
   return (
     <div>
       <header>
+        TODO: Complete the header and footer
         <nav>
           <Link to="/">Finance Bro</Link>
           <div>
             <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/form">Form</Link>
+            <Link to="/results">Results</Link>
           </div>
         </nav>
       </header>

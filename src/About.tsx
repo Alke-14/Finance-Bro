@@ -66,14 +66,27 @@ const About: React.FC = () => {
 
       sessionStorage.setItem(
         "carvibe_recommendation",
-        JSON.stringify({ id, prompt, result, ts: Date.now() })
+        JSON.stringify({
+          id,
+          prompt,
+          result,
+          answers: {
+            timeSpent,
+            reaction,
+            drivingType,
+            importantDetail,
+            frequency,
+            music,
+            travel,
+          },
+          ts: Date.now(),
+        })
       );
 
       // Lightweight navigation without requiring a router.
       // Create a /results route/page that reads from sessionStorage key above.
-      // if (window?.location) {
-      //   window.location.assign("/results");
-      // }
+      window.location.href = "/results";
+
       console.log("Recommendation result:", result);
     } catch (err) {
       console.error("Recommendation request failed:", err);
@@ -83,6 +96,39 @@ const About: React.FC = () => {
       );
     }
   };
+
+  React.useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem("carvibe_recommendation");
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      const answers = parsed?.answers;
+      if (!answers) return;
+
+      const idMap: Record<string, string> = {
+        timeSpent: "time-spent",
+        reaction: "reaction",
+        drivingType: "driving-type",
+        importantDetail: "important-detail",
+        frequency: "frequency",
+        music: "music",
+        travel: "travel",
+      };
+
+      Object.entries(idMap).forEach(([key, id]) => {
+        const el = document.getElementById(id) as HTMLInputElement | null;
+        if (
+          el &&
+          typeof answers[key] !== "undefined" &&
+          answers[key] !== null
+        ) {
+          el.value = String(answers[key]);
+        }
+      });
+    } catch (err) {
+      console.error("Failed to restore saved answers:", err);
+    }
+  }, []);
 
   return (
     <div className="bg-linear-to-t py-5 from-green-800 to-gray-800 flex items-center justify-center">
