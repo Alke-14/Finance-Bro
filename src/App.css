@@ -40,7 +40,7 @@ footer {
 
 /* the buttons in this section */
 .hero-actions {
-    display: flex;
+    /* display: flex; */
     gap: 1rem;
     justify-content: center;
 }

@@ -44,9 +44,6 @@ function App() {
 
   return(
     <div className = "app-container">
-      <header className="header">
-        <h1>Home Page</h1>
-      </header>
 
       <main className = "main-content">
         <video 
