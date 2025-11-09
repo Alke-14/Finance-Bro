@@ -4,3 +4,184 @@ footer {
     color: white;
     padding: 10px;
 }
+/* HeroSection styling */
+
+.hero-section {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 6rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.dream-car-highlight {
+    color: #e63946
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: #ccc
+}
+
+/* the buttons in this section */
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-form,
+.btn-learn {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 25px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* this is going to be the form button hover */
+.btn-form {
+    background-color: #e63946;
+    color: white;
+    border: none;
+}
+
+.btn-form-hover {
+    background-color: #ff4f5a;
+}
+
+/* and this is learn button */
+.btn-learn {
+    background: none;
+    border: 2px solid #e63946;
+    color: #e63946
+}
+
+.btn-learn-hover {
+    background-color: white;
+    color: white;
+}
+
+/*a cool animation effect */
+.hero-content {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+
+/* CORE values section */
+.core-values-section {
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 3rem 1.5rem;
+}
+
+.section-heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.core-values-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:1.5rem;
+    margin-top: 1rem;
+}
+
+.core-value-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: #fff;
+    border: 3px solid #111;
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor:default
+}
+
+.core-value-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    background-color: #fdfdfd;
+}
+
+.core-left {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #111;
+    flex-shrink: 0;
+    width: 80px;
+    text-align: center;
+    border-right: 3px solid #111;
+    padding-right: 1rem;
+}
+
+.core-right {
+    text-align: left;
+    flex: 1;
+}
+
+.core-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0 0 0.5rem;
+}
+
+.core-desc{
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+    line-height: 1.5;
+}
+
+core-tooltip {
+    /* position: absolute; */
+    left: 50%;
+    /* transform: translateX(-50%); */
+    background:#111;
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    width: 90%;
+    max-width: 400px;
+    /* opacity: 0; */
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.core-value-card:hover .core-tooltip {
+    opacity: 1 !important;
+} 
+.main-car-video {
+    width: 100% !important;
+}
